@@ -16,4 +16,4 @@
 
 ```
 basePreviewOffsetX很好理解实际上就是：
-ha    
+![](./images/f1.gif)
