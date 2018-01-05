@@ -80,3 +80,5 @@ basePreviewOffsetY的topPadding是FolderIcon自身topPadding。
 我们知道android中View的坐标系与寻常的直角坐标系y轴是相反的，故O1的y坐标中- radius * Math.sin(theta) / 2 取了负号。  
 ![](./images/f4.gif)  
 
+### FolderIcon预览图分析
+
