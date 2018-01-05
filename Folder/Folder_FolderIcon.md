@@ -74,9 +74,9 @@ basePreviewOffsetY的topPadding是FolderIcon自身topPadding。
 ```
 
 这个函数result数组具体是返回待排布图标的(left,top)坐标，下面结合图具体说明result[0]和result[1]。图中O点表示FolderIcon预览图标的圆心，O1表示某个预览图标的的圆心，A表示对应预览图标的(left,top)坐标
-![](./images/LayoutRule.png)
-![](./images/f2.gif)
-![](./images/f3.gif)
+![](./images/LayoutRule.png)  
+![](./images/f2.gif)  
+![](./images/f3.gif)  
 我们知道android中View的坐标系与寻常的直角坐标系y轴是相反的，故O1的y坐标中- radius * Math.sin(theta) / 2 取了负号。  
 ![](./images/f4.gif)  
 
