@@ -80,5 +80,51 @@ basePreviewOffsetY的topPadding是FolderIcon自身topPadding。
 我们知道android中View的坐标系与寻常的直角坐标系y轴是相反的，故O1的y坐标中- radius * Math.sin(theta) / 2 取了负号。  
 ![](./images/f4.gif)  
 
-### FolderIcon预览图分析
+**若要实现自己的FolderIcon的预览图中的图标排布只需实现接口FolderIcon.PreviewLayoutRule即可**
+
+### FolderIcon预览图在Canvas绘制分析
+
+```java {.line-numbers}
+
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+
+        if (!mBackgroundIsVisible) return;
+
+        mPreviewItemManager.recomputePreviewDrawingParams();
+
+        if (!mBackground.drawingDelegated()) {
+            mBackground.drawBackground(canvas);
+        }
+
+        if (mFolder == null) return;
+        if (mFolder.getItemCount() == 0 && !mAnimating) return;
+
+        final int saveCount;
+
+        if (canvas.isHardwareAccelerated()) {
+            saveCount = canvas.saveLayer(0, 0, getWidth(), getHeight(), null,
+                    Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.CLIP_TO_LAYER_SAVE_FLAG);
+        } else {
+            saveCount = canvas.save(Canvas.CLIP_SAVE_FLAG);
+            if (mPreviewLayoutRule.clipToBackground()) {
+                canvas.clipPath(mBackground.getClipPath(), Region.Op.INTERSECT);
+            }
+        }
+
+        mPreviewItemManager.draw(canvas);
+
+        if (mPreviewLayoutRule.clipToBackground() && canvas.isHardwareAccelerated()) {
+            mBackground.clipCanvasHardware(canvas);
+        }
+        canvas.restoreToCount(saveCount);
+
+        if (mPreviewLayoutRule.clipToBackground() && !mBackground.drawingDelegated()) {
+            mBackground.drawBackgroundStroke(canvas);
+        }
+
+        drawBadge(canvas);
+    }
+
+```
 
