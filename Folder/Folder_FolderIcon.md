@@ -19,8 +19,6 @@ basePreviewOffsetX很好理解实际上就是：
 
 ![](./images/f1.gif)
 
-<<<<<<< HEAD
-=======
 basePreviewOffsetY中的previewPadding实际为 grid.folderIconPreviewPadding。  
 basePreviewOffsetY的grid.folderBackgroundOffset决定的是预览图标与DoubleShadowBubbleTextView之间的距离。实际这个值为负，使得这两者之间存在间距。  
 basePreviewOffsetY的topPadding是FolderIcon自身topPadding。
@@ -129,5 +127,7 @@ basePreviewOffsetY的topPadding是FolderIcon自身topPadding。
     }
 
 ```
+上述代码可以总结为如下流程图  
+![FolderIconDispatchDraw](./images/FolderIconDispatchDraw.png)
 
->>>>>>> 9f550e484d30b8fab03cc3d087df5867fec0e7a3
+
