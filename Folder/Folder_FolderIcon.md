@@ -157,6 +157,6 @@ Folder主要提供了两个功能：
     public int findNearestArea(int pixelX, int pixelY) 
 
 ```
-可知它是根据当前手指坐标（pixelX,pixelY）找到最近可以放置被拖拽图标的位置。在回到getTargetRank可知它传给FolderPagedView.findNearestArea点的坐标是基于FolderIcon的左上角的。其中就带来了个限制：**如果左上角是Footer的话，那么传给findNearestArea就存在一个Footer高度的偏移。上图Folder的布局除去Padding，可以认为FolderPagedView和其是完全重合的。**
+可知它是根据当前手指坐标（pixelX,pixelY）找到最近可以放置被拖拽图标的位置。在回到getTargetRank，可知它传给FolderPagedView.findNearestArea点的坐标是基于FolderIcon的左上角的。其中就带来了个限制：**如果Footer在左上角的话，那么传给findNearestArea就存在一个Footer高度的偏移。上图Folder的布局除去Padding，可以认为FolderPagedView和其是完全重合的。**
 这点限制如果在遇到自定义文件夹布局同时又想复用Folder绝大部分逻辑的时候就会遇到。
 
