@@ -131,6 +131,12 @@ added in API level 21       drawBadge(canvas);
 ```
 
 ## 2. Folder
+Folder是文件夹展开的根容器，如下图所示。
+![Folder](./images/Folder.webp)  
+Folder主要提供了两个功能：
+1.为图标在文件夹内拖拽提供了支持。  
+2.文件夹打开关闭的动画。
+
 
 
 
