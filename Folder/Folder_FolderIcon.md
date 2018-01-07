@@ -135,8 +135,28 @@ Folder是文件夹展开的根容器，如下图所示。
 ![Folder](./images/Folder.webp)  
 Folder主要提供了两个功能：
 1.为图标在文件夹内拖拽提供了支持。  
-2.文件夹打开关闭的动画。
+2.[文件夹打开关闭的动画。](./Animation/folder_create_delete.md)  
 
+**对于第一点有个值得注意的地方**
+先看拖拽文件夹中的图标，动态排序的方法Folder.getTargetRank。它将在Folder.onDragOver中调用。
+```java {.line-numbers}
 
+    private int getTargetRank(DragObject d, float[] recycle) {
+        recycle = d.getVisualCenter(recycle);
+        return mContent.findNearestArea(
+                (int) recycle[0] - getPaddingLeft(), (int) recycle[1] - getPaddingTop());
+    }
 
+```
+再看FolderPagedView这个方法的申明：
+```java {.line-numbers}
+
+    /**
+     * @return the rank of the cell nearest to the provided pixel position.
+     */
+    public int findNearestArea(int pixelX, int pixelY) 
+
+```
+可知它是根据当前手指坐标（pixelX,pixelY）找到最近可以放置被拖拽图标的位置。在回到getTargetRank可知它传给FolderPagedView.findNearestArea点的坐标是基于FolderIcon的左上角的。其中就带来了个限制：**如果左上角是Footer的话，那么传给findNearestArea就存在一个Footer高度的偏移。上图Folder的布局除去Padding，可以认为FolderPagedView和其是完全重合的。**
+这点限制如果在遇到自定义文件夹布局同时又想复用Folder绝大部分逻辑的时候就会遇到。
 
