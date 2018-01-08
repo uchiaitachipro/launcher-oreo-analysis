@@ -135,7 +135,7 @@ Folder是文件夹展开的根容器，如下图所示。
 ![Folder](./images/Folder.webp)  
 Folder主要提供了两个功能：
 1.为图标在文件夹内拖拽提供了支持。  
-2.[文件夹打开关闭的动画。](./Animation/folder_create_delete.md)  
+2.[文件夹打开关闭的动画。](./Animation/folder_anim.md)  
 
 **对于第一点有个值得注意的地方**
 先看拖拽文件夹中的图标，动态排序的方法Folder.getTargetRank。它将在Folder.onDragOver中调用。
