@@ -95,5 +95,5 @@ CellLayout.java
 这样做可以避免多次Invalidate，在一次动画过程中只会有一次Invalidate。
 
 ## 2. 文件夹打开 / 关闭动画
-Folder.animateOpen其实有两种实现方式一种是Folder.getOpeningAnimator，另一种是FolderAnimationManager.getOpeningAnimator。Folder.getOpeningAnimator是以前版本中的文件夹打开动画的实现；当前版本是采用的后者。FolderAnimationManager.getAnimator主要做了这几件事：
+Folder.animateOpen其实有两种实现方式一种是Folder.getOpeningAnimator，另一种是FolderAnimationManager.getOpeningAnimator。Folder.getOpeningAnimator是以前版本中的文件夹打开动画的实现；当前版本是采用的后者。FolderAnimationManager.getAnimator主要做了这几件事：  
 1. 
