@@ -90,3 +90,10 @@ PreviewBackground.java
 
 ``` 
 CellLayout.java
+
+**其中的动画使用方式也是值得学习的：ValueAnimator更新相关动画属性->动画中调用对应控件的Invalidate->控件重绘(ondraw)使用相关动画属性值。**
+这样做可以避免多次Invalidate，在一次动画过程中只会有一次Invalidate。
+
+## 2. 文件夹打开 / 关闭动画
+Folder.animateOpen其实有两种实现方式一种是Folder.getOpeningAnimator，另一种是FolderAnimationManager.getOpeningAnimator。Folder.getOpeningAnimator是以前版本中的文件夹打开动画的实现；当前版本是采用的后者。FolderAnimationManager.getAnimator主要做了这几件事：
+1. 
