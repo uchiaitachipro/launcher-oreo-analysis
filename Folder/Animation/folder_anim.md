@@ -117,3 +117,29 @@ Folder.animateOpen其实有两种实现方式一种是Folder.getOpeningAnimator�
             Math.round((paddingOffsetY + initialSize) / initialScale));
 
 ```
+比如View源码中的setScaleX
+```java {.line-numbers}
+
+    /**
+     * Sets the amount that the view is scaled in x around the pivot point, as a proportion of
+     * the view's unscaled width. A value of 1 means that no scaling is applied.
+     *
+     * @param scaleX The scaling factor.
+     * @see #getPivotX()
+     * @see #getPivotY()
+     *
+     * @attr ref android.R.styleable#View_scaleX
+     */
+    public void setScaleX(float scaleX) {
+        if (scaleX != getScaleX()) {
+            invalidateViewProperty(true, false);
+            mRenderNode.setScaleX(scaleX);
+            invalidateViewProperty(false, true);
+
+            invalidateParentIfNeededAndWasQuickRejected();
+            notifySubtreeAccessibilityStateChangedIfNeeded();
+        }
+    }
+
+
+```
