@@ -102,7 +102,7 @@ Folder.animateOpen其实有两种实现方式一种是Folder.getOpeningAnimator�
 4. 计算初始需要裁剪的reveal参数。
 5. addPreviewItemAnimators 在FolderIcon中预览图标的动画。
 
-### 2.1 1-4步骤取得效果
+### 2.1 1-5步骤取得效果
 其中1-4取得的效果类似下面两张图的变化：
 ![Folder Open](./images/Open.png)
 
