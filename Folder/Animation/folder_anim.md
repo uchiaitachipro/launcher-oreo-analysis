@@ -102,6 +102,7 @@ Folder.animateOpen其实有两种实现方式一种是Folder.getOpeningAnimator�
 4. 计算初始需要裁剪的reveal参数。
 5. addPreviewItemAnimators 在FolderIcon中预览图标的动画。
 
+### 2.1 1-4步骤取得效果
 其中1-4取得的效果类似下面两张图的变化：
 ![Folder Open](./images/Open.png)
 
@@ -141,5 +142,8 @@ Folder.animateOpen其实有两种实现方式一种是Folder.getOpeningAnimator�
         }
     }
 
-
 ```
+#### 2.2 addPreviewItemAnimators效果
+这个动画主要是使得FolderPagedView中在FolderIcon中预览的icon，在最开始完全与FolderIcon中预览图标完全重合。文件夹打开时FolderIcon的预览图有个扩张的效果，关闭的时候有个收缩的效果。
+
+![addPreviewItemAnimators](./images/addPreviewItemAnimators.png)
