@@ -21,9 +21,9 @@ DragLayer也提供了子View在DragLayer中的位置，这是实现拖拽基础�
 
 ## 3. DragView 分析
 ### 3.1 DragView拖动分析
-在DragView中有几个和拖动有关的重要变量mRegistrationX mRegistrationY mLastTouchX mLastTouchY mAnimatedShiftX mAnimatedShiftY。
-mRegistrationX mRegistrationY 是记录长按拖拽图标的初始位置。
-mLastTouchX mLastTouchY 是当前Touch事件中的 x,y 坐标
+在DragView中有几个和拖动有关的重要变量mRegistrationX mRegistrationY mLastTouchX mLastTouchY mAnimatedShiftX mAnimatedShiftY。  
+mRegistrationX mRegistrationY 是记录长按拖拽图标的初始位置。  
+mLastTouchX mLastTouchY 是当前Touch事件中的 x,y 坐标。 
 mAnimatedShiftX mAnimatedShiftY 是PinchShortcut的长按的的初始位置距离DragView的中心偏移。
 
 
