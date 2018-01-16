@@ -104,7 +104,7 @@ _DragView.java_
 
 ### 3.2 Oreo拖拽图标内容晃动的动画效果分析
 
-## 4. DragLayer.onInterceptTouchEvent切换mActiveController 分析
+## 4. DragLayer.onInterceptTouchEvent切换mActiveController分析
 
 
 
