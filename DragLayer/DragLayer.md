@@ -45,7 +45,7 @@ DragLayer也提供了子View在DragLayer中的位置，这是实现拖拽基础�
 ```
 _DragView.java_
 
-mRegistrationX mRegistrationX mLastTouchX mLastTouchY具体作用如下图所示：
+mRegistrationX mRegistrationX mLastTouchX mLastTouchY具体作用如下图所示：  
 ![DragView](./images/DragView.png)  
 其中mAnimatedShiftX mAnimatedShiftY一般为0，只有拖拽应用快捷方式时才会有值，并且记录的是当前触摸坐标与DragView中心的偏移。
 ```java {.line-numbers}
@@ -104,7 +104,7 @@ _DragView.java_
 
 ### 3.2 Oreo拖拽图标内容晃动的动画效果分析
 
-
+## 4. DragLayer.onInterceptTouchEvent切换mActiveController 分析
 
 
 
