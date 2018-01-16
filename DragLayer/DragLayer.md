@@ -98,7 +98,7 @@ _ShortcutItemView.java_
     }
 
 ```
-_DragView.java_
+_DragView.java_  
 由DragView.animateShift可知当ShortItemView长按生成DragView的中心最后会和指间重合同时mAnimatedShiftX mAnimatedShiftY变为0。由此可知一般来说DragView.applyTranslation 中mAnimatedShiftX mAnimatedShiftY是为了偏移到中心而设的。
 **如果Shortcut、Folder也需要在长按时将其中心偏移到指间中心，也可以采用ShortcutsItemView一样的方法** 
 
