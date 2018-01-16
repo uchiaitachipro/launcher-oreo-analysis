@@ -45,7 +45,7 @@ DragLayer也提供了子View在DragLayer中的位置，这是实现拖拽基础�
 ```
 _DragView.java_
 
-mRegistrationX mRegistrationX mLastTouchX mLastTouchY具体作用如下图所示：  
+mRegistrationX mRegistrationX mLastTouchX mLastTouchY具体作用如下图所示：
 ![DragView](./images/DragView.png)  
 其中mAnimatedShiftX mAnimatedShiftY一般为0，只有拖拽应用快捷方式时才会有值，并且记录的是当前触摸坐标与DragView中心的偏移。
 ```java {.line-numbers}
@@ -98,9 +98,12 @@ _ShortcutItemView.java_
     }
 
 ```
-_DragView.java_  
-由DragView.animateShift可知当ShortItemView长按生成DragView的中心最后会和指间重合同时mAnimatedShiftX mAnimatedShiftY变为0。由此可知一般来说DragView.applyTranslation 中mAnimatedShiftX mAnimatedShiftY是为了偏移到中心而设的。
+_DragView.java_
+由DragView.animateShift可知当ShortItemView长按生成DragView的中心最后会和指间重合同时mAnimatedShiftX mAnimatedShiftY变为0。由此可知一般来说DragView.applyTranslation 中mAnimatedShiftX mAnimatedShiftY是为了偏移到中心而设的。  
 **如果Shortcut、Folder也需要在长按时将其中心偏移到指间中心，也可以采用ShortcutsItemView一样的方法** 
+
+### 3.2 Oreo拖拽图标内容晃动的动画效果分析
+
 
 
 
