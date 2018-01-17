@@ -237,3 +237,22 @@ _AppWidgetResizeFrame.java_
 
 ```  
 _AppWidgetResizeFrame.java_  
+
+### 4.2 DragController为mActiveController条件
+当快捷方式、文件夹、小部件长按时会在DragController.startDrag创建mDragDriver时，就会拦截。
+```java {.line-numders}
+
+ public DragView startDrag(Bitmap b, int dragLayerX, int dragLayerY,
+            DragSource source, ItemInfo dragInfo, Point dragOffset, Rect dragRegion,
+            float initialDragViewScale, DragOptions options) {
+                //...
+                 mDragDriver = DragDriver.create(mLauncher, this, mDragObject, mOptions);
+                //... 
+
+}
+
+    public boolean onControllerInterceptTouchEvent(MotionEvent ev) {
+        //...
+        return mDragDriver != null && mDragDriver.onInterceptTouchEvent(ev);
+    }
+```
