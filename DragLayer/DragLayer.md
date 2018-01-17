@@ -256,7 +256,8 @@ _AppWidgetResizeFrame.java_
         return mDragDriver != null && mDragDriver.onInterceptTouchEvent(ev);
     }
 ```  
-_DragController.java_
+_DragController.java_  
+
 ```java {.line-numbers}
 
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -265,4 +266,6 @@ _DragController.java_
     }
 
 ```
-_DragDriver.java_
+_DragDriver.java_  
+
+### 4.3应用菜单拦截条件
