@@ -268,4 +268,41 @@ _DragController.java_
 ```
 _DragDriver.java_  
 
-### 4.3应用菜单拦截条件
+### 4.3 应用菜单拦截条件
+```java {.line-numbers}
+
+    @Override
+    public boolean onControllerInterceptTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            mNoIntercept = false;
+            mTouchEventStartedOnHotseat = mLauncher.getDragLayer().isEventOverHotseat(ev);
+            //Condition A
+            if (!mLauncher.isAllAppsVisible() && mLauncher.getWorkspace().workspaceInModalState()) {
+                mNoIntercept = true;
+            }
+            //Condition B 
+            else if (mLauncher.isAllAppsVisible() &&
+                    !mAppsView.shouldContainerScroll(ev)) {
+                mNoIntercept = true;
+            } 
+            //Condition C
+            else if (AbstractFloatingView.getTopOpenView(mLauncher) != null) {
+                mNoIntercept = true;
+            } else {
+                //...
+                //Condition D 
+        }
+
+        if (mNoIntercept) {
+            return false;
+        }
+        mDetector.onTouchEvent(ev);
+
+        //Condition E
+        if (mDetector.isSettlingState() && (isInDisallowRecatchBottomZone() || isInDisallowRecatchTopZone())) {
+            return false;
+        }
+        return mDetector.isDraggingOrSettling();
+    }
+
+```
