@@ -103,10 +103,136 @@ _DragView.java_
 **如果Shortcut、Folder也需要在长按时将其中心偏移到指间中心，也可以采用ShortcutsItemView一样的方法** 
 
 ### 3.2 Oreo拖拽图标内容晃动的动画效果分析
-
+//TODO
 ## 4. DragLayer.onInterceptTouchEvent切换mActiveController分析
+### 4.1 小部件调整大小分析
+Step1. 当长按小部件然后放下时，AppWidgetResizeFrame会被添加到对应的小部件的位置。  
+Step2. 再次按下若触摸区域在AppWidgetResizeFrame内，则mActiveController为
+AppWidgetResizeFrame。
+
+拖拽小部件并放下,并在onDropCompleted执行
+```java {.line-numbers}
+
+    public void onDrop(final DragObject d) {
+        //...
+        if (pInfo != null && pInfo.resizeMode != AppWidgetProviderInfo.RESIZE_NONE
+            && !d.accessibleDrag) {
+            mDelayedResizeRunnable = new Runnable() {
+                public void run() {
+                    if (!isPageInTransition()) {
+                        DragLayer dragLayer = mLauncher.getDragLayer();
+                        dragLayer.addResizeFrame(hostView, cellLayout);
+                    }
+                }
+            };
+        }
+        //..
+    }
+
+    public void onDropCompleted(final View target, final DragObject d,
+            final boolean isFlingToDelete, final boolean success) {
+
+        //...
+        if (!isFlingToDelete) {
+            // Fling to delete already exits spring loaded mode after the animation finishes.
+            mLauncher.exitSpringLoadedDragModeDelayed(success,
+                    Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT, mDelayedResizeRunnable);
+            mDelayedResizeRunnable = null;
+        }
+    }
+
+```  
+_Workspace.java_  
+  
+AppWidgetResizeFrame调整布局和小部件所在区域重合  
+```java {.line-numbers}
+
+    public void addResizeFrame(LauncherAppWidgetHostView widget, CellLayout cellLayout) {
+        clearResizeFrame();
+
+        mCurrentResizeFrame = (AppWidgetResizeFrame) LayoutInflater.from(mLauncher)
+                .inflate(R.layout.app_widget_resize_frame, this, false);
+        mCurrentResizeFrame.setupForWidget(widget, cellLayout, this);
+        ((LayoutParams) mCurrentResizeFrame.getLayoutParams()).customPosition = true;
+
+        addView(mCurrentResizeFrame);
+        mCurrentResizeFrame.snapToWidget(false);
+    }
+
+```  
+_DragLayer.java_  
+```java {line-numbers}
 
 
+    /**
+     * Returns the rect of this view when the frame is snapped around the widget, with the bounds
+     * relative to the {@link DragLayer}.
+     */
+    private void getSnappedRectRelativeToDragLayer(Rect out) {
+        float scale = mWidgetView.getScaleToFit();
 
+        mDragLayer.getViewRectRelativeToSelf(mWidgetView, out);
 
+        int width = 2 * mBackgroundPadding
+                + (int) (scale * (out.width() - mWidgetPadding.left - mWidgetPadding.right));
+        int height = 2 * mBackgroundPadding
+                + (int) (scale * (out.height() - mWidgetPadding.top - mWidgetPadding.bottom));
 
+        int x = (int) (out.left - mBackgroundPadding + scale * mWidgetPadding.left);
+        int y = (int) (out.top - mBackgroundPadding + scale * mWidgetPadding.top);
+
+        out.left = x;
+        out.top = y;
+        out.right = out.left + width;
+        out.bottom = out.top + height;
+    }
+
+    public void snapToWidget(boolean animate) {
+        getSnappedRectRelativeToDragLayer(sTmpRect);
+        //... 
+        final DragLayer.LayoutParams lp = (DragLayer.LayoutParams) getLayoutParams();
+        if (!animate) {
+            lp.width = newWidth;
+            lp.height = newHeight;
+            lp.x = newX;
+            lp.y = newY;
+            for (int i = 0; i < HANDLE_COUNT; i++) {
+                mDragHandles[i].setAlpha(1.0f);
+            }
+            requestLayout();
+        }
+        //...
+    }
+
+```  
+_AppWidgetResizeFrame.java_  
+
+**判断TouchEvent是否落在AppWidgetResizeFrame内，若是则为mActiveController为AppWidgetResizeFrame**
+```java {.line-numbers}
+
+    @Override
+    public boolean onControllerInterceptTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN && handleTouchDown(ev)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean handleTouchDown(MotionEvent ev) {
+        Rect hitRect = new Rect();
+        int x = (int) ev.getX();
+        int y = (int) ev.getY();
+
+        getHitRect(hitRect);
+        if (hitRect.contains(x, y)) {
+            if (beginResizeIfPointInRegion(x - getLeft(), y - getTop())) {
+                mXDown = x;
+                mYDown = y;
+                return true;
+            }
+        }
+        return false;
+    }
+
+```  
+_AppWidgetResizeFrame.java_  
