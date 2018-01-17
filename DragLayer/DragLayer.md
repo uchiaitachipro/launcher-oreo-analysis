@@ -28,6 +28,7 @@ DragLayer也提供了子View在DragLayer中的位置，这是实现拖拽基础�
 | mRegistrationX<br>mRegistrationX | 是记录长按拖拽图标的初始位置。|
 | mLastTouchX<br>mLastTouchY | 是当前Touch事件中的 x,y 坐标。|
 | mAnimatedShiftX<br>mAnimatedShiftY | 是PinchShortcut的长按的的初始位置距离DragView的中心偏移。|  
+
 首先来看DragView的move函数
 ```java {.line-numbers}
 
