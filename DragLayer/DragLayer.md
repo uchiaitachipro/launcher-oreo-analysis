@@ -312,3 +312,6 @@ _AllAppsTransitionController.java_
 **Condition C.** 例如PopupContainerWindowWithArrow处于打开状态，Touch事件就不由mAllAppsController处理。  
 **Condition D.** 处理应用列表上拉下拉的情况和处理应用列表处于上拉下滑动画过程中，再次上拉下滑操作。通常是取消原来的操作。  
 **Condition E.** 处理底部顶部临界区情况，参见``java RECATCH_REJECTION_FRACTION ``定义。  
+
+### 4.4 其他条件
+//TODO
