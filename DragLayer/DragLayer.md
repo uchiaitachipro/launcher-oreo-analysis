@@ -306,3 +306,9 @@ _DragDriver.java_
     }
 
 ```
+_AllAppsTransitionController.java_
+**Condition A.** 当进入预览模式，点击hotseat区域不处理。  
+**Condition B.** 当应用列表处于打开状态并且里面的内容不能滚动(例如应用列表里的应用只有几个不满一屏的情况)。  
+**Condition C.** 例如PopupContainerWindowWithArrow处于打开状态，Touch事件就不由mAllAppsController处理。  
+**Condition D.** 处理应用列表上拉下拉的情况和处理应用列表处于上拉下滑动画过程中，再次上拉下滑操作。通常是取消原来的操作。  
+**Condition E.** 处理底部顶部临界区情况，参见``java RECATCH_REJECTION_FRACTION ``定义。  
