@@ -306,7 +306,7 @@ _DragDriver.java_
     }
 
 ```
-_AllAppsTransitionController.java_
+_AllAppsTransitionController.java_  
 **Condition A.** 当进入预览模式，点击hotseat区域不处理。  
 **Condition B.** 当应用列表处于打开状态并且里面的内容不能滚动(例如应用列表里的应用只有几个不满一屏的情况)。  
 **Condition C.** 例如PopupContainerWindowWithArrow处于打开状态，Touch事件就不由mAllAppsController处理。  
