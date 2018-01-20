@@ -39,9 +39,72 @@
 3. 计算BubbleTextView的缩放后的paddingTop。
 4. 减去DragView自身的padding。
 5. 计算DragView因中心缩放带来的偏移。  
+ 
+```java {.line-numbers}
+
+    float scale = getDescendantCoordRelativeToSelf((View) child.getParent(), coord);
+    scale *= childScale;
+    int toX = coord[0];
+    int toY = coord[1];
+    float toScale = scale;
+
+    toScale = scale / dragView.getIntrinsicIconScaleFactor();
+
+    toY += Math.round(toScale * tv.getPaddingTop());
 ![Shortcut](./images/Shortcut.webp)
+    if (dragView.getDragVisualizeOffset() != null) {
+        toY -=  Math.round(toScale * dragView.getDragVisualizeOffset().y);
+    }
 
+    toY -= dragView.getMeasuredHeight() * (1 - toScale) / 2;
+    toX -= (dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
 
+```  
+![Shortcut](./images/Shortcut.webp)  
+
+## 4. 文件夹最终位置的计算
+文件夹最终位置计算可以分为以下几步：
+1. 计算放下位置在CellLayout中的位置。
+2. 将DragView中文件夹预览图标的位置与FolderIcon的位置对齐。
+(这是由于FolderIcon的DragView也会设置PaddingTop所致)
+```java {.line-numbers}
+
+ public DragView beginDragShared(View child,
+            DragSource source, ItemInfo dragObject,
+            DragPreviewProvider previewProvider
+            DragOptions dragOptions) {
+        //...
+        Point dragVisualizeOffset = null;
+        Rect dragRect = null;
+        //...
+        else if (child instanceof FolderIcon) {
+            int previewSize = grid.folderIconSizePx;
+            dragVisualizeOffset = new Point(- halfPadding, halfPadding - child.getPaddingTop());
+            dragRect = new Rect(0, child.getPaddingTop(), child.getWidth(), previewSize);
+        }
+        //... 
+    }
+
+```
+_Workspace.java_
+
+3. 减去因scale导致BlurSizeOutlinePadding偏移
+4. 计算DragView因中心缩放带来的偏移。  
+
+```java {.line-numbers}
+
+    //...
+    else if (child instanceof FolderIcon) {
+        // Account for holographic blur padding on the drag view
+        toY += Math.round(scale * (child.getPaddingTop() - dragView.getDragRegionTop()));
+        toY -= scale * dragView.getBlurSizeOutline() / 2;
+        toY -= (1 - scale) * dragView.getMeasuredHeight() / 2;
+         // Center in the x coordinate about the target's drawable
+        toX -= (dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
+    }
+    //...
+
+```
 
 
 
