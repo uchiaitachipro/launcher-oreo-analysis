@@ -107,7 +107,33 @@ _Workspace.java_
 ```
 
 ## 5. 将快捷方式放入文件夹中最终位置的计算
+1. 计算FolderIcon在DragLayer中的位置。
+2. 计算预览图标在FolderIcon中的位置的中心。因为拖拽处于预览模式会scale，所以需要乘系数``` scaleRelativeToDragLayer ```。因为getLocalCenterForIndex是计算正常情况下FolderIcon中预览图标的中心，只要乘以``` scaleRelativeToDragLayer ```便是预览情况下的中点。因为对 center[0] center[1]乘以该系数就相当于对式子里的每项乘。
+3. 根据中心算出最终位置的left top坐标。  
+```java {.line-numbers}
 
+ private void onDrop(final ShortcutInfo item, DragView animateView, Rect finalRect,
+    float scaleRelativeToDragLayer, int index, Runnable postAnimationRunnable){
+
+    Rect to = finalRect;
+    if (to == null) {
+        to = new Rect();
+        //...
+        dragLayer.getDescendantRectRelativeToSelf(this, to);
+        //...
+    }
+
+    int[] center = new int[2];
+    float scale = getLocalCenterForIndex(index, index + 1, center);
+    center[0] = (int) Math.round(scaleRelativeToDragLayer * center[0]);
+    center[1] = (int) Math.round(scaleRelativeToDragLayer * center[1]);
+
+    to.offset(center[0] - animateView.getMeasuredWidth() / 2,
+         center[1] - animateView.getMeasuredHeight() / 2);    
+
+}
+
+```
 
 
 
