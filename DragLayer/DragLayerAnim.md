@@ -134,7 +134,9 @@ _Workspace.java_
 }
 
 ```
+_FolderIcon.java_
 
+**经过以上分析可知，即使要改成拖拽不进入预览模式，对于整个拖拽系统也没有任何影响，因为它就是``` scaleRelativeToDragLayer == 1```情况。不过现在的布局是基于scale的，所以整体布局需要调整。**
 
 
 
