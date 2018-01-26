@@ -8,7 +8,7 @@ LauncherModel可以认为是Launcher3的数据中心和数据管理者，它的�
 3. 监听当前各种环境的改变以决定Launcher是否要重新加载。比如配置是否改变、是否切换语言。  
 4. 通过**Callbacks**将当前变化及时通知UI。
 
-LauncherModel涉及到的比较重要的类有：
+LauncherModel涉及到的比较重要的类有：  
 | 类          | 作用         |  
 | ----------  | :-------------:   |  
 | Launcher   | 实现了LauncherModel定义的接口Callbacks，LauncherModel通过这个接口通知LauncherUI界面更新 |  
