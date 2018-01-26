@@ -9,15 +9,9 @@ LauncherModel可以认为是Launcher3的数据中心和数据管理者，它的�
 4. 通过**Callbacks**将当前变化及时通知UI。
 
 LauncherModel涉及到的比较重要的类有：  
-| 类          | 作用         |  
-| ----------  | -------------:   |  
-| Launcher   | 实现了LauncherModel定义的接口Callbacks，LauncherModel通过这个接口通知LauncherUI界面更新 |  
-| [LoaderTask](LoaderTask.md)  |加载Launcher3的数据包括桌面图标、小部件信息、所有应用信息、deep shortcuts |  
-| LauncherProvider | 提供了对Launcher3数据库的增删改查操作，比较重要的是两张表，favorites表和icons表 |  
-| [PackageUpdatedTask](PackageUpdatedTask.md) | 应用安装，卸载、升级等变化时处理类，它将同步更新Launcher的内存信息 |  
-| BgDataModel | 存储了Launcher3中所有的图标、文件夹、小部件等信息。相当于内存缓存 |  
-| ModelWriter | 暴露给Launcher对数据库操作的接口，内部将数据库操作投送到线程池中执行 |  
-| LoaderCursor| 将launcher3数据库中的信息转为info的工具类 |
+| 类 | 作用 |  
+| ----------  | -------------: |  
+| | |
 
 ## 2. Launcher3启动加载数据流程
 
