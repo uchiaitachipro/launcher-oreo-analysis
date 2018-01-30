@@ -22,6 +22,7 @@ LauncherModel涉及到的比较重要的类有：
 | LoaderResults | Launcher3启动加载完数据，更新UI辅助类。 |
 
 ## 2. Launcher3启动加载数据流程
+Launcher3启动加载数据大致流程如下，接下来会比较详细的分析loadWorkspace以及loadAllApps过程。
 ![LoadData](./images/LoadData.png)
 
 
