@@ -25,10 +25,21 @@ LauncherModel涉及到的比较重要的类有：
 Launcher3启动加载数据大致流程如下，接下来会比较详细的分析loadWorkspace以及loadAllApps过程。
 ![LoadData](./images/LoadData.png)
 
-### 2.1 加载桌面快捷方式流程
+### 2.1 加载桌面快捷方式流程  
 加载快捷方式流程，即loadWorkspace如下：  
 ![LoadWorkspace.png](./images/LoadWorkspace.png)
 
+#### 2.1.1 解析检查shortcut/application/deep shortcut
+
+具体见 [解析检查shortcut/application/deep shortcut](LoaderTask.md)
+
+#### 2.1.2 解析合成folder
+
+具体见 [解析合成folder](LoaderTask.md)
+
+#### 2.1.3 解析合成widget
+
+具体见 [解析合成widget](LoaderTask.md)
 
 
 ### 2.2 加载应用页信息
