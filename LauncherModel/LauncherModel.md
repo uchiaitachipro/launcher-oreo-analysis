@@ -26,9 +26,13 @@ Launcher3启动加载数据大致流程如下，接下来会比较详细的分�
 ![LoadData](./images/LoadData.png)
 
 ### 2.1 加载桌面快捷方式流程
+加载快捷方式流程，即loadWorkspace如下：  
+![LoadWorkspace.png](./images/LoadWorkspace.png)
+
 
 
 ### 2.2 加载应用页信息
+
 
 ## 3. 安装更新应用流程
 ### 3.1 安装应用流程
